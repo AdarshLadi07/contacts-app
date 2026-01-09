@@ -7,11 +7,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// MongoDB URI
 const MONGO_URI =
   "mongodb+srv://adarshladi07_db_user:Naruto2005@cluster0.ahi4m2z.mongodb.net/contactsDB";
 
-//  Connect MongoDB FIRST, then start server
+
 mongoose
   .connect(MONGO_URI)
   .then(() => {
@@ -25,12 +24,12 @@ mongoose
     console.error("MongoDB connection failed:", err);
   });
 
-//  Test route
+
 app.get("/", (req, res) => {
   res.send("Backend is running");
 });
 
-//  GET contacts (NO failure now)
+
 app.get("/contacts", async (req, res) => {
   try {
     const contacts = await Contact.find({});
@@ -41,7 +40,7 @@ app.get("/contacts", async (req, res) => {
   }
 });
 
-//  POST contact
+
 app.post("/contacts", async (req, res) => {
   try {
     const contact = new Contact(req.body);
@@ -52,3 +51,4 @@ app.post("/contacts", async (req, res) => {
     res.status(500).json({ error: "Save failed" });
   }
 });
+
